@@ -69,63 +69,92 @@ export default function Header({ content, language, onLanguageChange }: HeaderPr
   }, []);
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-700 ease-out ${
+    <header className={`fixed top-0 w-full z-50 transition-all duration-700 ease-out header-entrance ${
       shouldHaveSolidBackground 
-        ? 'bg-white/95 backdrop-blur-xl border-b border-gray-200/50' 
-        : 'bg-transparent border-b border-white/10'
-    }`}>
+        ? 'bg-white/80 backdrop-blur-2xl border-b border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)]' 
+        : 'bg-white/10 backdrop-blur-2xl border-b border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.12)]'
+    }`}
+    style={{
+      backdropFilter: 'blur(20px) saturate(180%)',
+      WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+    }}>
+      {/* Glassmorphism overlay effect */}
+      <div className={`absolute inset-0 transition-opacity duration-700 ${
+        shouldHaveSolidBackground 
+          ? 'bg-gradient-to-b from-white/40 to-white/20 opacity-100' 
+          : 'bg-gradient-to-b from-white/20 to-white/5 opacity-100'
+      }`}></div>
+      {/* Subtle shimmer effect */}
+      <div className="absolute inset-0 animate-glass-shimmer pointer-events-none"></div>
       
-      <div className="relative max-w-7xl mx-auto px-6 py-2 opacity-100">
+      <div className="relative max-w-7xl mx-auto px-6 py-4 opacity-100">
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center justify-between text-sm font-medium">
           {/* Logo - Tamaño aumentado */}
           <div className="flex-shrink-0 mr-10">
-            <Link href="/" className="inline-block">
-              <Image 
-                src="/logo.png" 
-                alt="BUHORA" 
-                width={200}
-                height={60}
-                className={`h-16 w-auto transition-all duration-300 ${
-                  shouldHaveSolidBackground ? 'brightness-0' : ''
-                }`}
-                priority
-              />
+            <Link href="/" className="inline-block group/logo transition-transform duration-500 hover:scale-105 active:scale-95">
+              <div className="relative">
+                <Image 
+                  src="/logo.png" 
+                  alt="BUHORA" 
+                  width={200}
+                  height={60}
+                  className={`h-16 w-auto transition-all duration-500 ${
+                    shouldHaveSolidBackground ? 'brightness-0' : ''
+                  } group-hover/logo:opacity-90`}
+                  priority
+                />
+                <div className={`absolute inset-0 rounded-xl transition-opacity duration-500 ${
+                  shouldHaveSolidBackground 
+                    ? 'bg-white/20' 
+                    : 'bg-white/10'
+                } opacity-0 group-hover/logo:opacity-100 -z-10 blur-sm`}></div>
+              </div>
             </Link>
           </div>
 
           {/* Navegación Central */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-2">
             <a
               href="#approach"
               onClick={(e) => {
                 e.preventDefault();
                 handleScrollToSection('approach');
               }}
-              className={`relative transition-all duration-300 font-medium group px-3 py-2 rounded-lg ${
+              className={`relative transition-all duration-500 ease-out font-medium group px-4 py-2.5 rounded-xl ${
                 shouldHaveSolidBackground 
-                  ? 'text-gray-500 hover:text-gray-800' 
+                  ? 'text-gray-700 hover:text-gray-900' 
                   : 'text-white/90 hover:text-white'
-              }`}
+              } hover:scale-105 active:scale-95`}
             >
-              <span className="relative z-10">{content.header.nav.approach}</span>
-              <span className={`absolute inset-x-0 bottom-0 h-0.5 ${
-                shouldHaveSolidBackground ? 'bg-black' : 'bg-white'
-              } transform transition-transform duration-300 origin-left rounded-full scale-x-0 group-hover:scale-x-100`}></span>
+              <span className="relative z-10 transition-all duration-300">{content.header.nav.approach}</span>
+              <span className={`absolute inset-0 rounded-xl transition-all duration-500 ${
+                shouldHaveSolidBackground 
+                  ? 'bg-white/60 backdrop-blur-sm' 
+                  : 'bg-white/20 backdrop-blur-sm'
+              } opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100`}></span>
+              <span className={`absolute inset-x-3 bottom-1.5 h-0.5 ${
+                shouldHaveSolidBackground ? 'bg-gradient-to-r from-gray-900 to-gray-700' : 'bg-gradient-to-r from-white to-white/80'
+              } transform transition-all duration-500 origin-center rounded-full scale-x-0 group-hover:scale-x-100`}></span>
             </a>
 
             <Link
               href="/servicios"
-              className={`relative transition-all duration-300 font-medium group px-3 py-2 rounded-lg ${
+              className={`relative transition-all duration-500 ease-out font-medium group px-4 py-2.5 rounded-xl ${
                 pathname.startsWith('/servicios') 
                   ? shouldHaveSolidBackground ? 'text-gray-900' : 'text-white'
-                  : shouldHaveSolidBackground ? 'text-gray-500 hover:text-gray-800' : 'text-white/90 hover:text-white'
-              }`}
+                  : shouldHaveSolidBackground ? 'text-gray-700 hover:text-gray-900' : 'text-white/90 hover:text-white'
+              } hover:scale-105 active:scale-95`}
             >
-              <span className="relative z-10">{content.header.nav.services}</span>
-              <span className={`absolute inset-x-0 bottom-0 h-0.5 ${
-                shouldHaveSolidBackground ? 'bg-black' : 'bg-white'
-              } transform transition-transform duration-300 origin-left rounded-full ${
+              <span className="relative z-10 transition-all duration-300">{content.header.nav.services}</span>
+              <span className={`absolute inset-0 rounded-xl transition-all duration-500 ${
+                shouldHaveSolidBackground 
+                  ? 'bg-white/60 backdrop-blur-sm' 
+                  : 'bg-white/20 backdrop-blur-sm'
+              } ${pathname.startsWith('/servicios') ? 'opacity-100 scale-100' : 'opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100'}`}></span>
+              <span className={`absolute inset-x-3 bottom-1.5 h-0.5 ${
+                shouldHaveSolidBackground ? 'bg-gradient-to-r from-gray-900 to-gray-700' : 'bg-gradient-to-r from-white to-white/80'
+              } transform transition-all duration-500 origin-center rounded-full ${
                 pathname.startsWith('/servicios') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
               }`}></span>
             </Link>
@@ -136,16 +165,21 @@ export default function Header({ content, language, onLanguageChange }: HeaderPr
                 e.preventDefault();
                 handleScrollToSection('contact');
               }}
-              className={`relative transition-all duration-300 font-medium group px-3 py-2 rounded-lg ${
+              className={`relative transition-all duration-500 ease-out font-medium group px-4 py-2.5 rounded-xl ${
                 shouldHaveSolidBackground 
-                  ? 'text-gray-500 hover:text-gray-800' 
+                  ? 'text-gray-700 hover:text-gray-900' 
                   : 'text-white/90 hover:text-white'
-              }`}
+              } hover:scale-105 active:scale-95`}
             >
-              <span className="relative z-10">{content.header.nav.contact}</span>
-              <span className={`absolute inset-x-0 bottom-0 h-0.5 ${
-                shouldHaveSolidBackground ? 'bg-black' : 'bg-white'
-              } transform transition-transform duration-300 origin-left rounded-full scale-x-0 group-hover:scale-x-100`}></span>
+              <span className="relative z-10 transition-all duration-300">{content.header.nav.contact}</span>
+              <span className={`absolute inset-0 rounded-xl transition-all duration-500 ${
+                shouldHaveSolidBackground 
+                  ? 'bg-white/60 backdrop-blur-sm' 
+                  : 'bg-white/20 backdrop-blur-sm'
+              } opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100`}></span>
+              <span className={`absolute inset-x-3 bottom-1.5 h-0.5 ${
+                shouldHaveSolidBackground ? 'bg-gradient-to-r from-gray-900 to-gray-700' : 'bg-gradient-to-r from-white to-white/80'
+              } transform transition-all duration-500 origin-center rounded-full scale-x-0 group-hover:scale-x-100`}></span>
             </a>
           </div>
 
@@ -154,14 +188,21 @@ export default function Header({ content, language, onLanguageChange }: HeaderPr
             {/* Language selector simple */}
             <button
               onClick={() => onLanguageChange(language === 'es' ? 'en' : 'es')}
-              className={`inline-flex items-center gap-1 px-2 py-1 text-sm rounded-md transition-colors duration-200 ${
+              className={`relative inline-flex items-center gap-2 px-4 py-2 text-sm rounded-xl transition-all duration-500 ease-out ${
                 shouldHaveSolidBackground
-                  ? 'text-gray-600 hover:text-gray-800 hover:bg-gray-100'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
-              }`}
+                  ? 'text-gray-700 hover:text-gray-900'
+                  : 'text-white/80 hover:text-white'
+              } hover:scale-105 active:scale-95 group`}
             >
-              <span className="text-xs">{language === 'es' ? '🇵🇾' : '🇺🇸'}</span>
-              <span className="font-medium">{language.toUpperCase()}</span>
+              <span className="relative z-10 text-base transition-transform duration-300 group-hover:scale-110">
+                {language === 'es' ? '🇵🇾' : '🇺🇸'}
+              </span>
+              <span className="relative z-10 font-medium">{language.toUpperCase()}</span>
+              <span className={`absolute inset-0 rounded-xl transition-all duration-500 ${
+                shouldHaveSolidBackground
+                  ? 'bg-white/60 backdrop-blur-sm'
+                  : 'bg-white/20 backdrop-blur-sm'
+              } opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100`}></span>
             </button>
           </div>
         </nav>
@@ -185,26 +226,50 @@ export default function Header({ content, language, onLanguageChange }: HeaderPr
           
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`touch-target hover:opacity-80 focus:outline-none transition-all duration-300 p-3 rounded-xl hover:shadow-lg border min-h-[48px] min-w-[48px] ${
+            className={`relative touch-target focus:outline-none transition-all duration-500 ease-out p-3 rounded-xl min-h-[48px] min-w-[48px] group ${
               shouldHaveSolidBackground
-                ? 'text-gray-800 hover:bg-gray-100 border-gray-200'
-                : 'text-white hover:bg-white/20 hover:backdrop-blur-sm border-white/10 hover:border-white/30'
-            }`}
+                ? 'text-gray-800'
+                : 'text-white'
+            } hover:scale-105 active:scale-95`}
             aria-label="Toggle menu"
+            style={{
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
+            }}
           >
-            <svg className="w-7 h-7 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <span className={`absolute inset-0 rounded-xl transition-all duration-500 ${
+              shouldHaveSolidBackground
+                ? 'bg-white/60 backdrop-blur-sm border border-white/40'
+                : 'bg-white/20 backdrop-blur-sm border border-white/20'
+            } opacity-100 group-hover:opacity-100 scale-100`}></span>
+            <svg className={`relative z-10 w-7 h-7 transition-all duration-500 ${
+              menuOpen ? 'rotate-90' : ''
+            }`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path 
                 strokeLinecap="round" 
                 strokeLinejoin="round" 
                 d={menuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'} 
-                className="transition-all duration-300"
+                className="transition-all duration-500"
               />
             </svg>
           </button>
         </div>
 
         {/* Mobile menu */}
-        <nav className={`lg:hidden ${menuOpen ? 'flex' : 'hidden'} flex-col items-center space-y-2 mt-6 text-base font-medium bg-white/95 backdrop-blur-xl shadow-2xl border border-gray-200 rounded-2xl p-6 transition-all duration-500 transform ${menuOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 -translate-y-4'} safe-area-bottom`}>
+        <nav className={`lg:hidden ${menuOpen ? 'flex' : 'hidden'} flex-col items-center space-y-2 mt-6 text-base font-medium rounded-2xl p-6 transition-all duration-700 ease-out transform ${menuOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 -translate-y-4'} safe-area-bottom`}
+        style={{
+          background: shouldHaveSolidBackground 
+            ? 'rgba(255, 255, 255, 0.75)' 
+            : 'rgba(255, 255, 255, 0.15)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.2)',
+        }}>
+          <div className={`absolute inset-0 rounded-2xl transition-opacity duration-700 ${
+            shouldHaveSolidBackground 
+              ? 'bg-gradient-to-b from-white/40 to-white/20' 
+              : 'bg-gradient-to-b from-white/20 to-white/5'
+          } opacity-100`}></div>
           
           {/* Enlaces principales */}
           <a
@@ -213,20 +278,32 @@ export default function Header({ content, language, onLanguageChange }: HeaderPr
               e.preventDefault();
               handleScrollToSection('approach');
             }}
-            className="touch-target w-full text-center py-3 px-4 rounded-lg transition-all duration-300 text-gray-700 hover:bg-gray-50"
+            className="relative touch-target w-full text-center py-3.5 px-4 rounded-xl transition-all duration-500 text-gray-700 hover:text-gray-900 group z-10"
           >
-            {content.header.nav.approach}
+            <span className={`absolute inset-0 rounded-xl transition-all duration-500 ${
+              shouldHaveSolidBackground 
+                ? 'bg-white/60 backdrop-blur-sm' 
+                : 'bg-white/20 backdrop-blur-sm'
+            } opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100`}></span>
+            <span className="relative z-10">{content.header.nav.approach}</span>
           </a>
 
           <Link
             href="/servicios"
-            className={`touch-target w-full text-center py-3 px-4 rounded-lg transition-all duration-300 ${
+            className={`relative touch-target w-full text-center py-3.5 px-4 rounded-xl transition-all duration-500 z-10 ${
               pathname.startsWith('/servicios') 
-                ? 'bg-gray-100 text-gray-900 font-semibold' 
-                : 'text-gray-700 hover:bg-gray-50'
+                ? shouldHaveSolidBackground 
+                  ? 'bg-white/80 text-gray-900 font-semibold' 
+                  : 'bg-white/30 text-white font-semibold'
+                : 'text-gray-700 hover:text-gray-900'
             }`}
           >
-            {content.header.nav.services}
+            <span className={`absolute inset-0 rounded-xl transition-all duration-500 ${
+              shouldHaveSolidBackground 
+                ? 'bg-white/60 backdrop-blur-sm' 
+                : 'bg-white/20 backdrop-blur-sm'
+            } ${pathname.startsWith('/servicios') ? 'opacity-100 scale-100' : 'opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100'}`}></span>
+            <span className="relative z-10">{content.header.nav.services}</span>
           </Link>
 
           <a
@@ -235,31 +312,66 @@ export default function Header({ content, language, onLanguageChange }: HeaderPr
               e.preventDefault();
               handleScrollToSection('contact');
             }}
-            className="touch-target w-full text-center py-3 px-4 rounded-lg transition-all duration-300 text-gray-700 hover:bg-gray-50"
+            className="relative touch-target w-full text-center py-3.5 px-4 rounded-xl transition-all duration-500 text-gray-700 hover:text-gray-900 group z-10"
           >
-            {content.header.nav.contact}
+            <span className={`absolute inset-0 rounded-xl transition-all duration-500 ${
+              shouldHaveSolidBackground 
+                ? 'bg-white/60 backdrop-blur-sm' 
+                : 'bg-white/20 backdrop-blur-sm'
+            } opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100`}></span>
+            <span className="relative z-10">{content.header.nav.contact}</span>
           </a>
 
           {/* Divisor */}
-          <div className="w-full h-px bg-gray-200 my-2"></div>
+          <div className={`w-full h-px my-3 z-10 ${
+            shouldHaveSolidBackground 
+              ? 'bg-gradient-to-r from-transparent via-gray-300 to-transparent' 
+              : 'bg-gradient-to-r from-transparent via-white/30 to-transparent'
+          }`}></div>
           
           {/* Selector de idioma */}
-          <div className="flex items-center gap-2 w-full p-1 bg-gray-100 rounded-lg">
+          <div className={`flex items-center gap-2 w-full p-1.5 rounded-xl z-10 ${
+            shouldHaveSolidBackground 
+              ? 'bg-white/60 backdrop-blur-sm' 
+              : 'bg-white/20 backdrop-blur-sm'
+          }`}
+          style={{
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+          }}>
             <button
               onClick={() => onLanguageChange('es')}
-              className={`touch-target flex-1 px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-300 ${
-                language === 'es' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
-              }`}
+              className={`relative touch-target flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-500 ${
+                language === 'es' 
+                  ? shouldHaveSolidBackground
+                    ? 'bg-white text-gray-900 shadow-lg scale-105' 
+                    : 'bg-white/40 text-white shadow-lg scale-105'
+                  : shouldHaveSolidBackground
+                    ? 'text-gray-600 hover:text-gray-900' 
+                    : 'text-white/70 hover:text-white'
+              } hover:scale-105 active:scale-95`}
             >
-              🇵🇾 ES
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                <span className="text-base">🇵🇾</span>
+                <span>ES</span>
+              </span>
             </button>
             <button
               onClick={() => onLanguageChange('en')}
-              className={`touch-target flex-1 px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-300 ${
-                language === 'en' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-600 hover:text-gray-900'
-              }`}
+              className={`relative touch-target flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-500 ${
+                language === 'en' 
+                  ? shouldHaveSolidBackground
+                    ? 'bg-white text-gray-900 shadow-lg scale-105' 
+                    : 'bg-white/40 text-white shadow-lg scale-105'
+                  : shouldHaveSolidBackground
+                    ? 'text-gray-600 hover:text-gray-900' 
+                    : 'text-white/70 hover:text-white'
+              } hover:scale-105 active:scale-95`}
             >
-              🇺🇸 EN
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                <span className="text-base">🇺🇸</span>
+                <span>EN</span>
+              </span>
             </button>
           </div>
         </nav>
