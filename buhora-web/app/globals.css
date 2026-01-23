@@ -1,35 +1,43 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #0B0D10;
-  --foreground: #ffffff;
+  --background: #0B0F14;
+  --foreground: #FFFFFF;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+  --accent-mint: #7FFFD4;
+  --accent-cyan: #6EE7F9;
+  --accent-green: #A7F3D0;
+  --accent-yellow: #FEF3C7;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  body {
+    @apply antialiased;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
 }
 
 /* Smooth scrolling */
@@ -37,4 +45,77 @@ body {
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* Animated gradients */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Bar chart animations - using clip-path for reliable SVG animation */
+@keyframes bar-grow {
+  0% {
+    clip-path: inset(100% 0% 0% 0%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0% 0% 0% 0%);
+    opacity: 1;
+  }
+}
+
+.animate-bar-grow {
+  animation: bar-grow 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+/* Line draw animation */
+@keyframes line-draw {
+  0% {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    opacity: 0;
+  }
+  100% {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.animate-line-draw {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: line-draw 1s ease-out forwards;
+}
+
+/* Gradient utilities */
+.gradient-border {
+  background: linear-gradient(135deg, #7FFFD4, #6EE7F9, #A7F3D0, #FEF3C7);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #7FFFD4, #6EE7F9, #A7F3D0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effects */
+.glow-mint {
+  box-shadow: 0 0 20px rgba(127, 255, 212, 0.2);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(110, 231, 249, 0.2);
 }
