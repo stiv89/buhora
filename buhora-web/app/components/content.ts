@@ -6,9 +6,28 @@ export const content: ContentData = {
       logo: 'Bᵘ',
       nav: {
         approach: 'Enfoque',
-        whatWeDo: 'Qué hacemos',
         services: 'Servicios',
-        contact: 'Contacto',
+        resources: 'Recursos',
+        contact: 'Contactar',
+        dropdowns: {
+          approach: {
+            clarityFirst: 'Claridad primero',
+            realDecisions: 'Decisiones reales',
+            independence: 'Independencia de herramientas',
+            howWeWork: 'Cómo trabajamos',
+          },
+          services: {
+            strategicAnalytics: 'Analítica estratégica',
+            executiveDashboards: 'BI & dashboards ejecutivos',
+            businessInsights: 'Insights de negocio',
+            decisionSupport: 'Soporte a decisiones',
+          },
+          resources: {
+            articles: 'Artículos / insights',
+            cases: 'Casos',
+            methodology: 'Metodología',
+          },
+        },
       },
     },
     hero: {
@@ -68,6 +87,10 @@ export const content: ContentData = {
       location: 'Asunción, Paraguay',
       terms: 'Términos y condiciones',
       privacy: 'Política de privacidad',
+      aboutUs: 'Sobre nosotros',
+      helpCenter: 'Centro de ayuda',
+      workWithUs: 'Trabaja con nosotros',
+      copyright: '© 2026 Buhora & co. Todos los derechos reservados.',
     },
   },
   en: {
@@ -75,9 +98,28 @@ export const content: ContentData = {
       logo: 'Bᵘ',
       nav: {
         approach: 'Approach',
-        whatWeDo: 'What we do',
         services: 'Services',
+        resources: 'Resources',
         contact: 'Contact',
+        dropdowns: {
+          approach: {
+            clarityFirst: 'Clarity first',
+            realDecisions: 'Real decisions',
+            independence: 'Tool independence',
+            howWeWork: 'How we work',
+          },
+          services: {
+            strategicAnalytics: 'Strategic analytics',
+            executiveDashboards: 'BI & executive dashboards',
+            businessInsights: 'Business insights',
+            decisionSupport: 'Decision support',
+          },
+          resources: {
+            articles: 'Articles / insights',
+            cases: 'Cases',
+            methodology: 'Methodology',
+          },
+        },
       },
     },
     hero: {
@@ -137,6 +179,10 @@ export const content: ContentData = {
       location: 'Asunción, Paraguay',
       terms: 'Terms and conditions',
       privacy: 'Privacy policy',
+      aboutUs: 'About us',
+      helpCenter: 'Help center',
+      workWithUs: 'Work with us',
+      copyright: '© 2026 Buhora & co. All rights reserved.',
     },
   },
 };

@@ -6,6 +6,7 @@ export { default as Approach } from './Approach';
 export { default as WhatWeDo } from './WhatWeDo';
 export { default as WhoWeWorkWith } from './WhoWeWorkWith';
 export { default as Closing } from './Closing';
+export { default as ContactSection } from './ContactSection';
 export { default as Footer } from './Footer';
 export { default as PageLayout } from './PageLayout';
 export * from './types';

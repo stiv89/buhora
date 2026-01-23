@@ -5,9 +5,28 @@ export interface Content {
     logo: string;
     nav: {
       approach: string;
-      whatWeDo: string;
       services: string;
+      resources: string;
       contact: string;
+      dropdowns: {
+        approach: {
+          clarityFirst: string;
+          realDecisions: string;
+          independence: string;
+          howWeWork: string;
+        };
+        services: {
+          strategicAnalytics: string;
+          executiveDashboards: string;
+          businessInsights: string;
+          decisionSupport: string;
+        };
+        resources: {
+          articles: string;
+          cases: string;
+          methodology: string;
+        };
+      };
     };
   };
   hero: {
@@ -48,6 +67,10 @@ export interface Content {
     location: string;
     terms: string;
     privacy: string;
+    aboutUs: string;
+    helpCenter: string;
+    workWithUs: string;
+    copyright: string;
   };
 }
 
