@@ -1,5 +1,4 @@
 import { Content } from './types';
-import SectionWrapper from './SectionWrapper';
 
 interface ProblemProps {
   content: Content;
@@ -7,49 +6,54 @@ interface ProblemProps {
 
 export default function Problem({ content }: ProblemProps) {
   return (
-    <SectionWrapper variant="gradient" className="py-24 sm:py-32 md:py-40">
-      <section className="px-4 sm:px-6 md:px-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Primera sección - Glass card */}
-          <div className="mb-12 sm:mb-16 md:mb-20">
-            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-12 md:p-16 lg:p-20 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
-              <div className="text-center space-y-6 sm:space-y-8 md:space-y-10">
-                <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-[1.2] text-white/95">
-                  {content.problem.text1}
-                </p>
-                <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-[1.2] text-white/95">
-                  {content.problem.text2.split(' ').map((word, i, arr) => {
-                    const cleanWord = word.toLowerCase().replace(/[.,!?;:]$/, '');
-                    const isClarity = cleanWord === 'clarity' || cleanWord === 'claridad';
-                    return (
-                      <span key={i}>
-                        {isClarity ? (
-                          <span className="text-white font-medium">{word}</span>
-                        ) : (
-                          word
-                        )}
-                        {i < arr.length - 1 && ' '}
-                      </span>
-                    );
-                  })}
-                </p>
-              </div>
+    <div style={{ background: '#07090E' }} className="py-16 sm:py-20 md:py-28">
+      <section className="px-6 sm:px-10 md:px-16">
+        <div className="max-w-3xl mx-auto space-y-px">
+
+          {/* Card 1 */}
+          <div className="bg-white/[0.03] border border-white/[0.07] rounded-[3px] px-8 sm:px-12 md:px-16 py-10 sm:py-12 md:py-14">
+            <div className="space-y-4 sm:space-y-5">
+              <p className="text-2xl sm:text-3xl md:text-4xl font-light leading-[1.25] text-white/80"
+                style={{ fontFamily: '"Sora", sans-serif' }}>
+                {content.problem.text1}
+              </p>
+              <p className="text-2xl sm:text-3xl md:text-4xl font-light leading-[1.25] text-white/80"
+                style={{ fontFamily: '"Sora", sans-serif' }}>
+                {content.problem.text2.split(' ').map((word, i, arr) => {
+                  const clean = word.toLowerCase().replace(/[.,!?;:]$/, '');
+                  const isKey = clean === 'clarity' || clean === 'claridad';
+                  return (
+                    <span key={i}>
+                      {isKey ? <span className="text-white font-medium">{word}</span> : word}
+                      {i < arr.length - 1 && ' '}
+                    </span>
+                  );
+                })}
+              </p>
             </div>
           </div>
-          
-          {/* Segunda sección - Glass card separada */}
-          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-12 md:p-16 lg:p-20 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
-            <div className="text-center space-y-6 sm:space-y-8 md:space-y-10">
-              <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-relaxed text-white/90">
+
+          {/* Divider dot */}
+          <div className="flex justify-center py-3">
+            <div className="w-1 h-1 rounded-full bg-white/10" />
+          </div>
+
+          {/* Card 2 */}
+          <div className="bg-white/[0.03] border border-white/[0.07] rounded-[3px] px-8 sm:px-12 md:px-16 py-10 sm:py-12 md:py-14">
+            <div className="space-y-4 sm:space-y-5">
+              <p className="text-xl sm:text-2xl md:text-3xl font-light leading-relaxed text-white/55"
+                style={{ fontFamily: '"DM Sans", sans-serif' }}>
                 {content.problem.text3}
               </p>
-              <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-relaxed text-white/90">
+              <p className="text-xl sm:text-2xl md:text-3xl font-light leading-relaxed text-white/55"
+                style={{ fontFamily: '"DM Sans", sans-serif' }}>
                 {content.problem.text4}
               </p>
             </div>
           </div>
+
         </div>
       </section>
-    </SectionWrapper>
+    </div>
   );
 }
